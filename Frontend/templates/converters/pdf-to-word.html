@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}PDF to Word Converter | Free Online PDF to DOCX Tool{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Convert PDF documents to editable Word files online for free. Fast, secure, and easy-to-use tool with instant download. No registration required.">
+<meta name="keywords" content="PDF to Word, PDF to DOCX, convert PDF, online document converter">
+<meta property="og:title" content="PDF to Word Converter | Free Online PDF to DOCX Tool">
+<meta property="og:description" content="Convert PDF documents to editable Word files online for free. Fast, secure, and easy-to-use tool.">
+<meta property="og:image" content="{% static 'images/og-preview.jpg' %}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PDF to Word Converter",
+  "description": "Free online PDF to Word conversion tool",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main>
+  <article class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-file-word text-blue-500 mr-2" aria-hidden="true"></i>
+        <span>PDF to Word Converter</span>
+      </h1>
+      <p class="text-gray-600">Convert your PDF documents to editable Word files quickly and easily. No watermarks, no file size limits.</p>
+    </header>
+    
+    <section aria-labelledby="upload-section">
+      <h2 id="upload-section" class="sr-only">File Upload Section</h2>
+      <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6 text-center hover:border-blue-400 transition-colors duration-300">
+        <label for="pdf-file" class="cursor-pointer">
+          <div class="flex flex-col items-center justify-center">
+            <i class="fas fa-cloud-upload-alt text-4xl text-blue-500 mb-3" aria-hidden="true"></i>
+            <span class="text-lg font-medium text-gray-700 mb-1">Choose PDF File</span>
+            <p class="text-sm text-gray-500">Supports .pdf format (Max 20MB)</p>
+          </div>
+          <input type="file" id="pdf-file" accept=".pdf" class="hidden">
+        </label>
+      </div>
+    </section>
+    
+    <section aria-labelledby="conversion-section">
+      <h2 id="conversion-section" class="sr-only">Conversion Section</h2>
+      <div class="flex justify-center mb-8">
+        <button id="convert-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 flex items-center">
+          <i class="fas fa-exchange-alt mr-2" aria-hidden="true"></i> Convert to Word
+        </button>
+      </div>
+    </section>
+    
+    <section aria-labelledby="results-section">
+      <h2 id="results-section" class="sr-only">Conversion Results</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+            <i class="fas fa-file-pdf text-red-500 mr-2" aria-hidden="true"></i> File Preview
+          </h3>
+          <div id="file-preview" class="flex flex-col items-center justify-center min-h-48">
+            <i class="fas fa-file-pdf text-4xl text-gray-300 mb-2" aria-hidden="true"></i>
+            <p class="text-gray-500 text-sm">No file selected</p>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+            <i class="fas fa-file-word text-blue-500 mr-2" aria-hidden="true"></i> Result
+          </h3>
+          <div id="result-container" class="min-h-48">
+            <div id="conversion-status" class="text-center py-4">
+              <p class="text-gray-500">Your Word document will appear here after conversion</p>
+            </div>
+            <div id="download-link-container" class="text-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="max-w-3xl mx-auto mt-12 prose prose-lg">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Convert PDF to Word</h2>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Click "Choose PDF File" or drag and drop your document</li>
+      <li>Preview your selected PDF in the left panel</li>
+      <li>Click "Convert to Word" button</li>
+      <li>Download your editable Word document when conversion completes</li>
+    </ol>
+    
+    <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Why Convert PDF to Word?</h2>
+    <ul class="list-disc pl-5 space-y-2">
+      <li><strong>Editable content</strong> - Modify text and formatting in Microsoft Word</li>
+      <li><strong>Preserve layout</strong> - Maintain original document structure and design</li>
+      <li><strong>Reuse content</strong> - Easily repurpose PDF content in other documents</li>
+    </ul>
+    
+    <div class="mt-8 border-t pt-6">
+      <h3 class="text-xl font-semibold text-gray-800 mb-3">Related Tools:</h3>
+      <div class="flex flex-wrap gap-4">
+        <a href="/word-to-pdf" class="text-blue-600 hover:underline">Word to PDF Converter</a>
+        <a href="/pdf-to-text" class="text-blue-600 hover:underline">PDF to Text Converter</a>
+        <a href="/document-converter" class="text-blue-600 hover:underline">Document Converter</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="{% static 'js/pdf-to-word.js' %}" defer></script>
+
+<style>
+.custom-download-btn {
+    background-color: #2b6cb0;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+.custom-download-btn:hover {
+    background-color: #2c5282;
+    transform: translateY(-1px);
+}
+#file-preview embed {
+    min-height: 300px;
+}
+</style>
+{% endblock %}

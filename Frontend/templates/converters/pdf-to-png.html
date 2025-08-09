@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Convert PDF to PNG Online - Free PDF to Image Converter{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Convert PDF pages to high-quality PNG images instantly. Free online tool with no watermarks or registration required.">
+<meta name="keywords" content="PDF to PNG, PDF to image, convert PDF to PNG, extract images from PDF, PDF converter">
+<link rel="canonical" href="https://yourdomain.com/pdf-to-png">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Free PDF to PNG Converter | Extract Images from PDF">
+<meta property="og:description" content="Convert PDF pages to PNG images with our free online tool. High quality, no watermarks, works in your browser.">
+<meta property="og:image" content="{% static 'images/pdf-to-png-og.jpg' %}">
+
+<!-- Twitter -->
+<meta property="twitter:title" content="Free PDF to PNG Converter | Extract Images from PDF">
+<meta property="twitter:description" content="Convert PDF to PNG images in seconds. No uploads needed - processing happens in your browser.">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PDF to PNG Converter",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "Free online tool to convert PDF pages to PNG images with high quality output",
+  "applicationCategory": "DocumentApplication"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="max-w-4xl mx-auto px-4 py-8">
+  <article class="bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-file-image text-blue-500 mr-2"></i>
+        PDF to PNG Converter
+      </h1>
+      <p class="text-gray-600">Extract high-quality PNG images from your PDF files. Perfect for presentations, documents, and more.</p>
+    </header>
+    
+    <section class="mb-8">
+      <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors duration-300">
+        <label for="pdf-file" class="cursor-pointer">
+          <div class="flex flex-col items-center justify-center">
+            <i class="fas fa-file-pdf text-4xl text-red-500 mb-3"></i>
+            <span class="text-lg font-medium text-gray-700 mb-1">Select PDF File</span>
+            <p class="text-sm text-gray-500">Supports all PDF documents (Max 20MB)</p>
+          </div>
+          <input type="file" id="pdf-file" accept=".pdf" class="hidden">
+        </label>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3">
+            <i class="fas fa-file-pdf text-red-500 mr-2"></i> PDF Preview
+          </h3>
+          <div id="file-preview" class="min-h-64 flex items-center justify-center">
+            <div class="text-center">
+              <i class="fas fa-file-alt text-4xl text-gray-300 mb-2"></i>
+              <p class="text-gray-500">No PDF selected</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3">
+            <i class="fas fa-image text-blue-500 mr-2"></i> PNG Result
+          </h3>
+          <div id="result-container">
+            <div id="conversion-status" class="text-center py-4">
+              <p class="text-gray-500">Your PNG will appear here after conversion</p>
+            </div>
+            <div id="download-link-container" class="text-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center mb-8">
+      <button id="convert-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
+        <i class="fas fa-exchange-alt mr-2"></i> Convert to PNG
+      </button>
+    </section>
+
+    <section class="prose max-w-none">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Convert PDF to PNG</h2>
+      <ol class="list-decimal pl-5 space-y-2">
+        <li>Upload your PDF file using the button above</li>
+        <li>Preview the PDF in the left panel</li>
+        <li>Click "Convert to PNG" button</li>
+        <li>Download your PNG image when ready</li>
+      </ol>
+
+      <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Why Convert PDF to PNG?</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong>Extract images</strong> - Get individual images from PDF documents</li>
+        <li><strong>Better editing</strong> - PNG format works better with image editors</li>
+        <li><strong>Transparency support</strong> - PNG maintains transparent backgrounds</li>
+        <li><strong>Web compatibility</strong> - PNGs work everywhere on the web</li>
+      </ul>
+    </section>
+  </article>
+</main>
+
+<script src="{% static 'js/pdf-to-png.js' %}"></script>
+<style>
+.custom-download-btn {
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.custom-download-btn:hover {
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+.custom-download-btn:active {
+    transform: translateY(0);
+}
+
+.custom-download-btn i {
+    font-size: 1.1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .custom-download-btn {
+        transition: none;
+    }
+}
+</style>
+{% endblock %}
