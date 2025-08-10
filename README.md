@@ -1,7 +1,7 @@
-**Toolifiq — File & Media Tools Platform**
+# Toolifiq — File & Media Tools Platform
 Toolifiq offers an array of file utilities: image converters (JPG ⇄ PNG), PDF tools (PDF→PNG, PDF→DOCX extract), compressors, encoders/decoders, and developer-friendly REST endpoints. Built for reliability, scale, and maintainability.
 
-**Key features**
+# Key features
 
 REST API endpoints for every tool (JSON responses + job IDs)
 
@@ -19,7 +19,7 @@ Responsive frontend with drag & drop upload, progress, preview, and download
 
 Audit logs and monitoring (Prometheus + Grafana) and Sentry for errors
 
-**Tech stack**
+# Tech stack
 
 Backend: Python, Django, Django REST Framework
 
